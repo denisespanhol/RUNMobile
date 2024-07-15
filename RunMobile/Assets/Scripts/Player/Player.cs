@@ -40,7 +40,10 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag(tagToDanger))
+        {
             canRun = false;
+            GameManager.Instance.EndGame();
+        }
     }
 
 }
