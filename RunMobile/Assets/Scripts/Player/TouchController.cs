@@ -21,6 +21,6 @@ public class TouchController : MonoBehaviour
 
     private void FollowMouse(float speed)
     {
-        transform.position += speed * Time.deltaTime * velocity * Vector3.right;
+        transform.position += speed * Time.deltaTime * velocity * Vector3.left;
     }
 }

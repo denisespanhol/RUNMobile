@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     [Header("Player Settings")]
     [SerializeField] private float speed = 1f;
     [SerializeField] private string tagToDanger = "Danger";
+    [SerializeField] private string tagToWin = "Endline";
 
     [Header("Lerp Settings")]
     [SerializeField] private Transform _target;
@@ -34,12 +35,21 @@ public class Player : MonoBehaviour
         _posToLerp.x = _target.position.x;
 
         transform.position = Vector3.Lerp(transform.position, _posToLerp, lerpSpeed * Time.deltaTime);
-        transform.Translate(transform.forward * speed * Time.deltaTime);
+        transform.Translate(speed * Time.deltaTime * transform.forward);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.CompareTag(tagToDanger))
+        {
+            canRun = false;
+            GameManager.Instance.EndGame();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag(tagToWin))
         {
             canRun = false;
             GameManager.Instance.EndGame();
