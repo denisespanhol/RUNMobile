@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
     [HideInInspector] public bool canRun;
 
@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float lerpSpeed;
 
     private Vector3 _posToLerp;
+    private bool _isInvencible = false;
 
     private void Start()
     {
@@ -42,6 +43,7 @@ public class Player : MonoBehaviour
     {
         if (collision.transform.CompareTag(tagToDanger))
         {
+            if (_isInvencible) return;
             canRun = false;
             GameManager.Instance.EndGame();
         }
@@ -55,5 +57,20 @@ public class Player : MonoBehaviour
             GameManager.Instance.EndGame();
         }
     }
+
+    #region POWER UPS
+
+    public void ToStartInvencible(float duration)
+    {
+        _isInvencible = true;
+        Invoke(nameof(ToEndInvencible), duration);
+    }
+
+    public void ToEndInvencible()
+    {
+        _isInvencible = false;
+    }
+
+    #endregion
 
 }

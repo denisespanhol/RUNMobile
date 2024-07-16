@@ -14,5 +14,11 @@ public class CollectableBase : MonoBehaviour
     private void Collect()
     {
         gameObject.SetActive(false);
+        OnCollect();
+    }
+
+    protected virtual void OnCollect()
+    {
+
     }
 }
