@@ -25,6 +25,7 @@ public class Player : Singleton<Player>
     private bool _isInvencible = false;
     private bool _canJump = false;
     private bool _isJumping = false;
+    private float _currentSpeed;
     private float _posY;
     private float _targetY;
     private float _newY;
@@ -33,6 +34,7 @@ public class Player : Singleton<Player>
     private void Start()
     {
         canRun = true;
+        _currentSpeed = speed;
         _startPosition = transform.position;
         _posY = transform.position.y;
     }
@@ -51,7 +53,7 @@ public class Player : Singleton<Player>
         _posToLerp.x = _target.position.x;
 
         transform.position = Vector3.Lerp(transform.position, _posToLerp, lerpSpeed * Time.deltaTime);
-        transform.Translate(speed * Time.deltaTime * transform.forward);
+        transform.Translate(_currentSpeed * Time.deltaTime * transform.forward);
     }
 
     public void HandleJump()
@@ -138,7 +140,15 @@ public class Player : Singleton<Player>
         _canJump = false;
     }
 
-    
+    public void SpeedUp(float speedBuff)
+    {
+        _currentSpeed += speedBuff;
+    }
+
+    public void SpeedNormal()
+    {
+        _currentSpeed = speed;
+    }
 
     #endregion
 
