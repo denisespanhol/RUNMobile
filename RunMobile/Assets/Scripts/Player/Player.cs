@@ -18,6 +18,7 @@ public class Player : Singleton<Player>
     [Header("Jump Settings")]
     [SerializeField] private float _jumpForce;
     [SerializeField] private float _jumpVelocity;
+    [SerializeField] private float _jumpTimeOnAir;
 
     private Vector3 _posToLerp;
     private Vector3 _startPosition;
@@ -61,7 +62,7 @@ public class Player : Singleton<Player>
         {
             _isJumping = true;
             _targetY = _posY + _jumpForce;
-            _jumpStartTime = Time.time; // Tempo de início do salto
+            _jumpStartTime = Time.time;
 
             StartCoroutine(Jump());
         }
@@ -79,7 +80,7 @@ public class Player : Singleton<Player>
         }
 
         // Pausa no topo do salto
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(_jumpTimeOnAir);
 
         // Descida
         _jumpStartTime = Time.time; // Tempo de início da descida
