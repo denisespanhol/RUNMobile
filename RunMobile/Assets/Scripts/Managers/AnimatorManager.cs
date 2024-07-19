@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimatorManager : MonoBehaviour
+public class AnimatorManager : Singleton<AnimatorManager>
 {
     [SerializeField] Animator _animator;
     [SerializeField] List<AnimatorSetup> _animatorSetups;
