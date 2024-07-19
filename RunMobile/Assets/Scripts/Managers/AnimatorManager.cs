@@ -12,7 +12,8 @@ public class AnimatorManager : Singleton<AnimatorManager>
         IDLE,
         RUN,
         DEATH,
-        VICTORY
+        VICTORY,
+        FLY
     }
 
     public void Play(AnimationType type, float currentSpeedFactor = 1)

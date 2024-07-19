@@ -66,6 +66,7 @@ public class Player : Singleton<Player>
             _targetY = _posY + _jumpForce;
             _jumpStartTime = Time.time;
 
+            AnimatorManager.Instance.Play(AnimatorManager.AnimationType.FLY);
             StartCoroutine(Jump());
         }
     }
@@ -104,6 +105,7 @@ public class Player : Singleton<Player>
         {
             if (_isInvencible) return;
             canRun = false;
+            AnimatorManager.Instance.Play(AnimatorManager.AnimationType.DEATH);
             GameManager.Instance.EndGame();
         }
     }
@@ -113,6 +115,7 @@ public class Player : Singleton<Player>
         if (other.CompareTag(tagToWin))
         {
             canRun = false;
+            AnimatorManager.Instance.Play(AnimatorManager.AnimationType.VICTORY);
             GameManager.Instance.EndGame();
         }
     }
