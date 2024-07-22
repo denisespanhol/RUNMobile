@@ -7,21 +7,17 @@ public class LevelManager : MonoBehaviour
 {
     public Transform levelContainer;
 
-    public List<GameObject> levels;
+    public List<LevelPieceBase> levels;
 
     [Header("Pieces")]
-    public List<GameObject> levelPieces;
-    public List<GameObject> startPieces;
-    public List<GameObject> endPieces;
+    public List<LevelPieceBase> levelPieces;
+    public List<LevelPieceBase> startPieces;
+    public List<LevelPieceBase> endPieces;
     public int piecesNumber = 5;
     public int startNumber = 1;
     public int endNumber = 1;
 
-    private GameObject _currentLevel;
-    private Transform _endPosition;
-    private int _index = 0;
-
-    private List<GameObject> _spawnedPieces = new();
+    private List<LevelPieceBase> _spawnedPieces = new();
 
     private void Awake()
     {
@@ -53,15 +49,16 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void CreateLevelPiece(List<GameObject> pieces)
+    private void CreateLevelPiece(List<LevelPieceBase> pieces)
     {
         var piece = pieces[Random.Range(0, pieces.Count)];
         var spawnedPiece = Instantiate(piece, levelContainer);
-        _endPosition = spawnedPiece.transform.Find("EndPoint");
 
         if(_spawnedPieces.Count > 0)
         {
-            spawnedPiece.transform.position = _endPosition.transform.position + new Vector3(0, 0, 4.8f);
+            var lastPiece = _spawnedPieces[_spawnedPieces.Count - 1];
+
+            spawnedPiece.transform.position = lastPiece.endPosition.transform.position + new Vector3(0, 0, 4.8f);
         }
 
         _spawnedPieces.Add(spawnedPiece);
@@ -69,7 +66,7 @@ public class LevelManager : MonoBehaviour
 
     private void CleanSpawnedPieces()
     {
-        foreach(GameObject piece in _spawnedPieces)
+        foreach(LevelPieceBase piece in _spawnedPieces)
         {
             Destroy(piece.gameObject);
         }
