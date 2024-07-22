@@ -18,6 +18,7 @@ public class LevelManager : MonoBehaviour
     public int endNumber = 1;
 
     private GameObject _currentLevel;
+    private Transform _endPosition;
     private int _index = 0;
 
     private List<GameObject> _spawnedPieces = new();
@@ -29,7 +30,7 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        GenerateLevel();
+        //GenerateLevel();
     }
 
     private void GenerateLevel()
@@ -56,10 +57,11 @@ public class LevelManager : MonoBehaviour
     {
         var piece = pieces[Random.Range(0, pieces.Count)];
         var spawnedPiece = Instantiate(piece, levelContainer);
+        _endPosition = spawnedPiece.transform.Find("EndPoint");
 
         if(_spawnedPieces.Count > 0)
         {
-            spawnedPiece.transform.position += new Vector3(0, 0, 1f);
+            spawnedPiece.transform.position = _endPosition.transform.position + new Vector3(0, 0, 4.8f);
         }
 
         _spawnedPieces.Add(spawnedPiece);
