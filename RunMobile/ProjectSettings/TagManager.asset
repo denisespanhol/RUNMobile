@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Danger
   - Endline
+  - Wall
   layers:
   - Default
   - TransparentFX

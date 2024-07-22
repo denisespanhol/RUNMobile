@@ -68,13 +68,15 @@ public class LevelManager : MonoBehaviour
 
         foreach (var piece in _spawnedPieces)
         {
-            if (piece.transform.Find("PRF_Wall") != null)
-            {
-                Transform objectWithRenderer = piece.transform.Find("PRF_Wall");
-                MeshRenderer childRenderer = objectWithRenderer.GetComponentInChildren<MeshRenderer>();
-               if (childRenderer != null) wallRenderers.Add(childRenderer);
+            MeshRenderer[] childrenRenderer = piece.GetComponentsInChildren<MeshRenderer>();
 
-            }    
+            foreach (var item in childrenRenderer)
+            {
+                if (item.CompareTag("Danger"))
+                {
+                    wallRenderers.Add(item);
+                }
+            }  
         }
         if (wallRenderers != null) ColorManager.Instance.walls = wallRenderers;
 
