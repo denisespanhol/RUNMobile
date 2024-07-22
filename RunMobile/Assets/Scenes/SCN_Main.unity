@@ -503,7 +503,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 412927005}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00031026185, y: 0.97569305, z: -0.21913731, w: -0.0013814187}
+  m_LocalRotation: {x: -0.00031025344, y: 0.97569305, z: -0.21913731, w: -0.0013813812}
   m_LocalPosition: {x: 0.026756568, y: 4.2699995, z: 9.449163}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1752,7 +1752,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.00031026185, y: 0.97569305, z: -0.21913731, w: -0.0013814187}
+  m_LocalRotation: {x: -0.00031025344, y: 0.97569305, z: -0.21913731, w: -0.0013813812}
   m_LocalPosition: {x: 0.026756568, y: 4.2699995, z: 9.449163}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4124,6 +4124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pieces: []
+  walls: []
   grass01: {fileID: 2100000, guid: 2c6f5ab601d22834883d3c7e18f8be41, type: 2}
   grass02: {fileID: 2100000, guid: 15654a743eccf384fb2312048db767f0, type: 2}
   ground: {fileID: 2100000, guid: bce0cd8cdfffc2a41b798316325a24d2, type: 2}

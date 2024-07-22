@@ -19,10 +19,12 @@ public class LevelManager : MonoBehaviour
 
     private List<LevelPieceBase> _spawnedPieces = new();
     private ColorManager.MaterialList materialFloor;
+    private ColorManager.MaterialList materialWall;
+    private int _randomNumber;
 
-    private void Awake()
+    private void Start()
     {
-        RandomizeFloorMaterials();
+        RandomizeAllTheMaterials();
         GenerateLevel();
     }
 
@@ -58,9 +60,26 @@ public class LevelManager : MonoBehaviour
             if (objectWithRenderer != null) renderers.Add(objectWithRenderer);
 
         }
-        ColorManager.Instance.pieces = renderers;
+        if (renderers != null) ColorManager.Instance.pieces = renderers;
 
-        ColorManager.Instance.MaterialChanger(materialFloor);
+        ColorManager.Instance.MaterialFloorChanger(materialFloor);
+
+        List<MeshRenderer> wallRenderers = new();
+
+        foreach (var piece in _spawnedPieces)
+        {
+            if (piece.transform.Find("PRF_Wall") != null)
+            {
+                Transform objectWithRenderer = piece.transform.Find("PRF_Wall");
+                MeshRenderer childRenderer = objectWithRenderer.GetComponentInChildren<MeshRenderer>();
+               if (childRenderer != null) wallRenderers.Add(childRenderer);
+
+            }    
+        }
+        if (wallRenderers != null) ColorManager.Instance.walls = wallRenderers;
+
+        
+        ColorManager.Instance.MaterialWallChanger(materialWall);
     }
 
     private void CreateLevelPiece(List<LevelPieceBase> pieces)
@@ -90,11 +109,29 @@ public class LevelManager : MonoBehaviour
 
     private void RandomizeFloorMaterials()
     {
-        var randomNumber = Random.Range(1, 4);
+        _randomNumber = Random.Range(1, 4);
+        Debug.Log("Floor: " + _randomNumber);
 
-        if (randomNumber == 1) materialFloor = ColorManager.MaterialList.GRASS01;
-        if (randomNumber == 2) materialFloor = ColorManager.MaterialList.GRASS02;
-        if (randomNumber == 3) materialFloor = ColorManager.MaterialList.GROUND;
-        if (randomNumber == 4) materialFloor = ColorManager.MaterialList.ROCKS;
+        if (_randomNumber == 1) materialFloor = ColorManager.MaterialList.GRASS01;
+        if (_randomNumber == 2) materialFloor = ColorManager.MaterialList.GRASS02;
+        if (_randomNumber == 3) materialFloor = ColorManager.MaterialList.GROUND;
+        if (_randomNumber == 4) materialFloor = ColorManager.MaterialList.ROCKS;
+    }
+
+    private void RandomizeWallMaterials()
+    {
+        _randomNumber = Random.Range(1, 4);
+        Debug.Log("Wall: " + _randomNumber);
+
+        if (_randomNumber == 1) materialWall = ColorManager.MaterialList.GRASS01;
+        if (_randomNumber == 2) materialWall = ColorManager.MaterialList.GRASS02;
+        if (_randomNumber == 3) materialWall = ColorManager.MaterialList.GROUND;
+        if (_randomNumber == 4) materialWall = ColorManager.MaterialList.ROCKS;
+    }
+
+    private void RandomizeAllTheMaterials()
+    {
+        RandomizeFloorMaterials();
+        RandomizeWallMaterials();
     }
 }
