@@ -33,6 +33,8 @@ public class LevelManager : MonoBehaviour
     {
         CleanSpawnedPieces();
 
+        ColorManager.Instance.MaterialChanger(ColorManager.MaterialList.ROCKS);
+
         for(int i = 0; i < startNumber; i++)
         {
             CreateLevelPiece(startPieces);
