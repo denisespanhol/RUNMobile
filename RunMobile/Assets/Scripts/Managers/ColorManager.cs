@@ -5,11 +5,12 @@ using UnityEngine;
 public class ColorManager : Singleton<ColorManager>
 {
     public List<MeshRenderer> pieces;
+    public List<ColorSetup> setups;
 
-    public Texture grass01;
-    public Texture grass02;
-    public Texture ground;
-    public Texture rocks;
+    public Material grass01;
+    public Material grass02;
+    public Material ground;
+    public Material rocks;
 
     public enum MaterialList
     {
@@ -19,14 +20,22 @@ public class ColorManager : Singleton<ColorManager>
         ROCKS
     }
 
-    public void MaterialChanger(MaterialList textureOption)
+    public void MaterialChanger(MaterialList material)
     {
         foreach(MeshRenderer piece in pieces)
         {
-            if (textureOption == MaterialList.GRASS01) piece.materials[0].SetTexture("Grass01", grass01);
-            if (textureOption == MaterialList.GRASS02) piece.materials[0].SetTexture("Grass02", grass02);
-            if (textureOption == MaterialList.GROUND) piece.materials[0].SetTexture("Ground", ground);
-            if (textureOption == MaterialList.ROCKS) piece.materials[0].SetTexture("Rocks", rocks);
+            setups.ForEach(setup => {
+                if (setup.materialList == material)
+                {
+                    foreach(MeshRenderer piece in pieces)
+                    {
+                        if (material == MaterialList.GRASS01) piece.sharedMaterial = grass01;
+                        if (material == MaterialList.GRASS02) piece.sharedMaterial = grass02;
+                        if (material == MaterialList.GROUND) piece.sharedMaterial = ground;
+                        if (material == MaterialList.ROCKS) piece.sharedMaterial = rocks;
+                    }
+                }
+            });
         }
     }
 }

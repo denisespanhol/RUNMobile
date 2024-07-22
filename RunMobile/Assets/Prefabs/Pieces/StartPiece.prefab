@@ -120,7 +120,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4185923895966361514, guid: c9276543ab67adb4ab11a48585cd5db5, type: 3}
       propertyPath: m_Name
-      value: PRF_FloorGrassWithRocks
+      value: PRF_floor
       objectReference: {fileID: 0}
     - target: {fileID: 4398417038235113473, guid: c9276543ab67adb4ab11a48585cd5db5, type: 3}
       propertyPath: m_LocalPosition.x
