@@ -18,9 +18,11 @@ public class LevelManager : MonoBehaviour
     public int endNumber = 1;
 
     private List<LevelPieceBase> _spawnedPieces = new();
+    private ColorManager.MaterialList materialFloor;
 
     private void Awake()
     {
+        RandomizeFloorMaterials();
         GenerateLevel();
     }
 
@@ -58,7 +60,7 @@ public class LevelManager : MonoBehaviour
         }
         ColorManager.Instance.pieces = renderers;
 
-        ColorManager.Instance.MaterialChanger(ColorManager.MaterialList.ROCKS);
+        ColorManager.Instance.MaterialChanger(materialFloor);
     }
 
     private void CreateLevelPiece(List<LevelPieceBase> pieces)
@@ -84,5 +86,15 @@ public class LevelManager : MonoBehaviour
         }
 
         _spawnedPieces.Clear();
+    }
+
+    private void RandomizeFloorMaterials()
+    {
+        var randomNumber = Random.Range(1, 4);
+
+        if (randomNumber == 1) materialFloor = ColorManager.MaterialList.GRASS01;
+        if (randomNumber == 2) materialFloor = ColorManager.MaterialList.GRASS02;
+        if (randomNumber == 3) materialFloor = ColorManager.MaterialList.GROUND;
+        if (randomNumber == 4) materialFloor = ColorManager.MaterialList.ROCKS;
     }
 }
