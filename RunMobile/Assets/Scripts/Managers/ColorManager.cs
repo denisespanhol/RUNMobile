@@ -5,7 +5,6 @@ using UnityEngine;
 public class ColorManager : Singleton<ColorManager>
 {
     public List<MeshRenderer> pieces;
-    public List<ColorSetup> setups;
 
     public Material grass01;
     public Material grass02;
@@ -22,26 +21,12 @@ public class ColorManager : Singleton<ColorManager>
 
     public void MaterialChanger(MaterialList material)
     {
-        foreach(MeshRenderer piece in pieces)
+        foreach (MeshRenderer piece in pieces)
         {
-            setups.ForEach(setup => {
-                if (setup.materialList == material)
-                {
-                    foreach(MeshRenderer piece in pieces)
-                    {
-                        if (material == MaterialList.GRASS01) piece.sharedMaterial = grass01;
-                        if (material == MaterialList.GRASS02) piece.sharedMaterial = grass02;
-                        if (material == MaterialList.GROUND) piece.sharedMaterial = ground;
-                        if (material == MaterialList.ROCKS) piece.sharedMaterial = rocks;
-                    }
-                }
-            });
+            if (material == MaterialList.GRASS01) piece.sharedMaterial = grass01;
+            else if (material == MaterialList.GRASS02) piece.sharedMaterial = grass02;
+            else if (material == MaterialList.GROUND) piece.sharedMaterial = ground;
+            else if (material == MaterialList.ROCKS) piece.sharedMaterial = rocks;
         }
     }
-}
-
-[System.Serializable]
-public class ColorSetup
-{
-    public ColorManager.MaterialList materialList;
 }

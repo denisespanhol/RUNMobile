@@ -4124,7 +4124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pieces: []
-  setups: []
   grass01: {fileID: 2100000, guid: 2c6f5ab601d22834883d3c7e18f8be41, type: 2}
   grass02: {fileID: 2100000, guid: 15654a743eccf384fb2312048db767f0, type: 2}
   ground: {fileID: 2100000, guid: bce0cd8cdfffc2a41b798316325a24d2, type: 2}
