@@ -9,6 +9,7 @@ public class PowerUpBase : CollectableBase
     protected override void OnCollect()
     {
         base.OnCollect();
+        Player.Instance.ToBounce();
         StartPowerUp();
     }
 

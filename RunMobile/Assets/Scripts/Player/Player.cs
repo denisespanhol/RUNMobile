@@ -24,6 +24,7 @@ public class Player : Singleton<Player>
     [SerializeField] private float _durationToScale = 1f;
     [SerializeField] private Ease _ease = Ease.OutBack;
 
+    private BounceHelper _bounce;
     private Vector3 _posToLerp;
     private Vector3 _startPosition;
     private bool _isInvencible = false;
@@ -37,6 +38,7 @@ public class Player : Singleton<Player>
 
     private void Start()
     {
+        _bounce = GetComponent<BounceHelper>();
         canRun = true;
         _currentSpeed = speed;
         _startPosition = transform.position;
@@ -123,6 +125,11 @@ public class Player : Singleton<Player>
             AnimatorManager.Instance.Play(AnimatorManager.AnimationType.VICTORY);
             GameManager.Instance.EndGame();
         }
+    }
+
+    public void ToBounce()
+    {
+        _bounce.Bounce();
     }
 
     #region POWER UPS
