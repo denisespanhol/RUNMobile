@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using DG.Tweening;
 
 public class Player : Singleton<Player>
 {
@@ -19,6 +20,10 @@ public class Player : Singleton<Player>
     [SerializeField] private float _jumpVelocity;
     [SerializeField] private float _jumpTimeOnAir;
 
+    [Header("Animation Settings")]
+    [SerializeField] private float _durationToScale = 1f;
+    [SerializeField] private Ease _ease = Ease.OutBack;
+
     private Vector3 _posToLerp;
     private Vector3 _startPosition;
     private bool _isInvencible = false;
@@ -36,6 +41,7 @@ public class Player : Singleton<Player>
         _currentSpeed = speed;
         _startPosition = transform.position;
         _posY = transform.position.y;
+        transform.DOScale(1, _durationToScale).SetEase(_ease);
     }
 
     private void Update()
