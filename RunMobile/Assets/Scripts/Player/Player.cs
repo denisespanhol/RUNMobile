@@ -23,6 +23,10 @@ public class Player : Singleton<Player>
     [Header("Animation Settings")]
     [SerializeField] private float _durationToScale = 1f;
     [SerializeField] private Ease _ease = Ease.OutBack;
+    [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private Color _speedUpColorParticle;
+    [SerializeField] private Color _jumpColorParticle;
+    private ParticleSystem.MainModule main;
 
     private BounceHelper _bounce;
     private Vector3 _posToLerp;
@@ -44,6 +48,8 @@ public class Player : Singleton<Player>
         _startPosition = transform.position;
         _posY = transform.position.y;
         transform.DOScale(1, _durationToScale).SetEase(_ease);
+        main = _particleSystem.main;
+        
     }
 
     private void Update()
@@ -147,22 +153,32 @@ public class Player : Singleton<Player>
 
     public void ToJump()
     {
+        _particleSystem.Pause();
         _canJump = true;
+        _particleSystem.Play();
+        main.startColor = _jumpColorParticle;
     }
 
     public void ToNotJump()
     {
         _canJump = false;
+        _particleSystem.Pause();
     }
 
     public void SpeedUp(float speedBuff)
     {
         _currentSpeed += speedBuff;
+
+        _particleSystem.Play();
+        main.startColor = _speedUpColorParticle;
     }
 
     public void SpeedNormal()
     {
         _currentSpeed = speed;
+
+        if (_canJump) return;
+        _particleSystem.Pause();
     }
 
     #endregion
